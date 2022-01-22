@@ -9,6 +9,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@project-serum/anchor": "^0.20.1",
+    "@project-serum/serum": "^0.13.61",
     "@solana/spl-token": "0.0.13",
     "@solana/web3.js": "^0.88.0",
     "bn.js": "^5.1.3",

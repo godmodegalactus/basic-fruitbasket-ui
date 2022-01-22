@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0",
+  "name": "writer_utils",
+  "instructions": [
+    {
+      "name": "write",
+      "accounts": [
+        {
+          "name": "target",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "offset",
+          "type": "u64"
+        },
+        {
+          "name": "data",
+          "type": "bytes"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "address": "FkVPe3KrRE18jXFq4P5CADUSd5YoWiJukBYsxpm2wyB8"
+  }
+}

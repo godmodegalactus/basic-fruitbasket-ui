@@ -27,18 +27,25 @@ function get_provider(): PhantomProvider | undefined {
     return undefined;
 }
 
-export const defualtProvider = {
-    publicKey: new PublicKey(0),
+export const defaultProvider  = {
+    publicKey : new PublicKey(0),
     isConnected : false,
     autoApprove : false,
+    signTransaction : null, 
+    signAllTransactions : null,
+    connect : null,
+    disconnect : null, 
+    on: null,
+    request : null,
+    listeners: null,
 }
 
 export const connectPhantom = async() => {
     const provider = get_provider();
     if (!provider) {
         window.open('https://phantom.app/', '_blank');
-        return;
+        return "";
       }
     await provider?.connect();
-    return provider;
+    return provider?.publicKey?.toString() ?? "";
 }

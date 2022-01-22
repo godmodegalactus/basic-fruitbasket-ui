@@ -20,8 +20,11 @@
           <input class="display-block" type="number" v-model="formState.amount">
       </div>
       <div class="mb-1">
+          <input style="margin-right: 5px;" class="cursor-pointer bg-btn normal-font-size" type="submit" value="Buy Basket" @click="buyBasket">
+          <input style="margin-right: 5px;" class="cursor-pointer bg-btn normal-font-size" type="submit" value="Sell Basket" @click="sellBasket">
+      </div>
+      <div class= "mb-1">
           <input style="margin-right: 5px;" class="cursor-pointer bg-btn normal-font-size" type="submit" value="Reset UI" @click="resetUI">
-          <input class="cursor-pointer bg-btn normal-font-size" type="submit" value="Init escrow" @click="onInitEscrow">
       </div>
     </div>
     <div>
@@ -47,7 +50,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-//import { connectPhantom } from "./util/phantom";
+import { connectPhantom, defaultProvider } from "./util/phantom";
 
 interface BasketState {
   basket_key : null | string;
@@ -80,9 +83,8 @@ export default defineComponent({
     }
 
     const connectPh = async () => {
-      //const provider = await connectPhantom();
-      
-      //formState.publicKey = provider === undefined ? "--" : provider.publicKey.toString();
+      const publicKey = await connectPhantom();
+      formState.publicKey = publicKey;
     }
 
     return {
