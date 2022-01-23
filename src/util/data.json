@@ -1,0 +1,180 @@
+{
+	"group": "CjaLZbDnZBxHK8hJg9fE4ZQiAbvCVGcA2DQsrcbQP84",
+	"cache": "BtngA2VPuZkY2GkcD1HVdK9iUQPFiQL6qThYpevES6F7",
+	"quote_token_name": "USDC",
+	"quote_token_mint": "96Zzw8xPv6AAEgPnSj68XprxEPEh69pD9o1W21nCDm85",
+	"quote_token_transaction_pool": "EvroXDACEvjjxmLAXWXFo6PR4xvFjjyvQsJrSEMNMhdU",
+	"fruitbasket_authority": "975E2mQpzWwhRSULkQszz7FSWisuMA1L2MDDRGn1ntz3",
+	"tokens": [
+		{
+			"name": "BTC",
+			"mint_address": "7DCbff2Q3rXmyo3F4ahLRdHmH16YuorUJHWHWKAdUrjx",
+			"market_address": "26DTDfMFYoDcQANHXYARGK15FNwjnzj7hYFtdBJJr86h",
+			"price_oracle": "ADqK1qNik69DXMPZ3aBgwcppLJh8QMD38kdJHH7AV92y",
+			"product_oracle": "Ckf2GNYvgzdYNFkhi8G3j6Mm291WfPDBwnm2kXhuvd27",
+			"pools": "64o7iDBs8r88DbtmW2zg1Se2bcjWjgnHGjFLpM5wGpar",
+			"openOrders": "CfhM53pRivAx3yN6fjyBYEZUYhC9nKpHRxej273snJyQ",
+			"requestQueue": "BKJJZnGXCzmv3CuS2V9rFLgAKsN2JxmmkVPPjbc2ES1T",
+			"eventQueue": "6T4ehjPR9B99yQe3dVB3T8zWt5DutCfm9DiLsDJyMNAK",
+			"bids": "3X4L7pF22RWotyVN7zXUrMhitSkJyNacjM3YCcNpaUKk",
+			"asks": "CP9vQkEUz9QG8MvotJJBbF2YMvD3wXg6rWVi4eqhaKWJ",
+			"tokenVault": "BJgJdEeS2n8bhwK5856aboWMKc3edHYE5rqr6cZCzh6t",
+			"quoteTokenVault": "GxmyzvzWQ4vVjG8jJQQm144f3n9D8WdZtXZhKHcUY5Cq",
+			"vaultSigner": "DyZyzERf8AwDh91bNGCcvFWhZrzuWQXAzHFkT6LZBGFe"
+		},
+		{
+			"name": "ETH",
+			"mint_address": "CL1cPHz3RotzxVAiPdFSd6eBJXftPoQLMatXkJ952S46",
+			"market_address": "5rSjf4TSR7St9PvFvFerRjHLgnkVEqkMKnPSDJQzSfDB",
+			"price_oracle": "4r6CWHY4wjsg96WMsSZVYVfLZGe9bH7vyvWo8Niiw3tA",
+			"product_oracle": "3LBgcRwhWxaUEhWVfjbRiWftGtJW8bEpQrGgL8qt48Bf",
+			"pools": "BTr3JQ2qNQ6gwNt88WjnTbdnvj6YGjZHSukbEx9QyunM",
+			"openOrders": "9Hc88AxsD6CrDFvDK34ujHnCEdV7NxtmM4sbn3Euycax",
+			"requestQueue": "CeTbZpbwqnYPvi6SyUpoBuQuCo3AinVb7kzHV3PiVHHm",
+			"eventQueue": "6aGdq6Z8t1xaRWdG5ixUsrNbJszgpiiEjFaa5oN7x3uQ",
+			"bids": "Esnfv7GDBqT12Y11LZcNCL1vExUWWD37gZH5qeu6dc5i",
+			"asks": "2bXpnt9Y9YZLZxb8FKTaFJXN9GhPm717KVrCmGVBfwv2",
+			"tokenVault": "2UDjQtckZx1RJnQiFQdy234ocB2ZDhhcmGkEL4axvuUq",
+			"quoteTokenVault": "BEKJnTat8WxHyYbjPSjehbVuMV84GeeJnPw3BebvLk7K",
+			"vaultSigner": "CEotH6G8j4GoZJVL3JjEAhWXADbWSKjXxoe3KH5pfKFj"
+		},
+		{
+			"name": "SOL",
+			"mint_address": "4xAUja7ueLTuiSwiRVNnevR2nTiNRqTmyqAQg1hW6DoC",
+			"market_address": "2da2TMJGV7G91KKTt6Zn3Za7kaHPWSbYP7G6RQgfHg8z",
+			"price_oracle": "7agwzZikhbEj9rV3CVVGwvVTYvggnEECha4ghkJzQPZB",
+			"product_oracle": "4PvDKnQNnuZmBDpcgiXVM5ESbUy5844rNttGTSWxR5Wi",
+			"pools": "8VHNpWMEJdDerFCH73PvCWqMK356u5TkokxTtHNMFuow",
+			"openOrders": "DYyzsZF1PBvGkfj3cqS7rQYFPVXWhRyMDBApKkseTzGS",
+			"requestQueue": "6AbCs5u17GvVB7hQwrivtVVHhgfNjVEcTgWqrqRxz5NM",
+			"eventQueue": "GkfphuFH3uy5KTdvuzawEug2KJRa7TSc4R5ugrT357QC",
+			"bids": "J9bXZNGayTttAjTbUNiLJaFaQkaXbXcYdAeKiPgmNFA2",
+			"asks": "D8hAcZsMMranCEEZS8mUJvhAXnCQqway5e4XvXHkQf3P",
+			"tokenVault": "2LpH2L1ysDJrDBv7wr3AJM1TY3dzAB5kRBnubwsZoJdc",
+			"quoteTokenVault": "71GKeouXFa5HtygS7K2dHv2kDifawXhhknQhWGHbpH4s",
+			"vaultSigner": "2y24WiFHzPtUFDudUnj7cw2gCK2ksJnd3vmqtSiPjMS6"
+		},
+		{
+			"name": "SRM",
+			"mint_address": "6EYcEYvv4YQG9aq1nUwt3sLu8hLESNLhj2YYDi71Prcy",
+			"market_address": "HSfytXvEJEJyrwkHRAo2gLYN3ZkckD7ykasaRQVrCunG",
+			"price_oracle": "4WHrE3WvmXG3JsFY89b5FuGzC6C7FdJAuP1tH6Eb9fSS",
+			"product_oracle": "7XShx3FSZNe5GT9kTMai65T5EFqiApbkUJ32HLffTgXT",
+			"pools": "HwN5Bg8KXkhTDQEjKgYjY85RpfL8TxvLwBABzMcbHEqo",
+			"openOrders": "BASBRP9ewyZP74hcxz6CmV7NbzLWYyA6LpSQS6FHPSws",
+			"requestQueue": "7QDnBFP9csYsBAQAfgBQ7rPYqLQQyaVbSYi8Lwamw86Z",
+			"eventQueue": "HF7GUJVRtRviu9fFm4VVa73R7b88Sk4M62UpUVexD2Vm",
+			"bids": "Er5jZPdjrx6JkxppHKreDf462uDqDg8uK7eqDZUqepy2",
+			"asks": "BzCX2bkPnRcQFSdhuzmu1E4zJPWr532CJoFzfkd46R5p",
+			"tokenVault": "FU3tQBTRhvkTpTqoHkJJtojRJn4v6VhCnQxP4ZUCoZt8",
+			"quoteTokenVault": "CNT7d4ZFZgaT5PEEwXLoC7BZrLU27gkMcRuFrKgBAYhX",
+			"vaultSigner": "CYfxzGAMfzEptCJqG181mtC2pkRWjGZjuV3zvye9N3dy"
+		},
+		{
+			"name": "MNGO",
+			"mint_address": "87DP8qYepu7yySgnuvRkw5knpSMU8ooTLZqAAwo4vCgw",
+			"market_address": "CBtQZL92k9RNsdethos2baVxT6td5pGzLBjgdGKgAB6G",
+			"price_oracle": "hoBx9jHDcToECR5iUNDCaM5AUQijiRhKx4uHVsh9UNS",
+			"product_oracle": "EyAigDG1gTXJFfpo3bJwyvJyRSbn2G5q3aGkMTZ3R1qS",
+			"pools": "GMEzXDJB9Adpb8qVX6EVWgYsVLFAxtLVeW8jgYQh2CL2",
+			"openOrders": "DAqUpMghD42wLW9dEi2anAygNFEfr6EdQG1YQ1Pb4k49",
+			"requestQueue": "CiZPF1w68f5RtWPdLroqQkYnUucarSLXqaR4mDf1XkrE",
+			"eventQueue": "Dh9FhqN8nAu5ot6fmvTsiToSzhTsh26UxpyccVpH1G98",
+			"bids": "emih7PaRSKUqMeZZrrK2fh2WW9CrdeLfB845AYHk8hF",
+			"asks": "3yWzB4rpGWtU3Gp2qqCajG58oEkUh5Avk9aZovSaNq5t",
+			"tokenVault": "7zs2QhJcS7zdrjMbsPbReQ8yWsmFrTNz25ZEZTJ2V5Zy",
+			"quoteTokenVault": "2GhQS3wyFHvtDoeSjf2ojfMCh8rrqZFiYoc7pvYBhFqD",
+			"vaultSigner": "fd3iHzNk4Cm38zZD8wxGVzbfTAAd91FsdYZeEdDdXGy"
+		},
+		{
+			"name": "GRAPH",
+			"mint_address": "6cKpdtdP6BCr7MzYi7Q7cEgkXuykfeZTonBofPE2A7Ej",
+			"market_address": "CEAdVY4NqgXzfpx3ebfeXe9Txp137iV9rBQfXw2bgEk6",
+			"price_oracle": "7wt5GXvR53MzFMUpZcr85RDgxBWH2RisET4cZM4CNb7h",
+			"product_oracle": "6dDrd47cX1FnXNp8hGW75snW79rKZh31jxMnfgPMBrJR",
+			"pools": "cWwuhiM27GoCBUMYCGU8GjWhzJq861ceqRLcGUFPDmP",
+			"openOrders": "6eEtiMnXEFtJ5bqHCj27yZeFjrJ86vj6ZXrJ45PsXp9z",
+			"requestQueue": "GEHMCozz9xPAwta1TFWbEeZgBRr5hMpgBCw961na5DR7",
+			"eventQueue": "FtSpqyGgTQZ8B5LSZqr1ri1CZP2SM8AMJRqzoeDigpDi",
+			"bids": "9u1N4CpkwCywU8KoQqsBEDPREAPoWxB6YNm7gY6ztbd8",
+			"asks": "6So2YoLpj6tDjVkEYdDuUWifgF4oEGnhyYxzeMZGSqGJ",
+			"tokenVault": "99ta8awPKG5hSK3VM34bBasYdYsWcWjE93wrS4LdXhkU",
+			"quoteTokenVault": "MgqoP6MFFLt3GSw7Rp6uzUC8qrhJMkdmTWUgCk3mnLE",
+			"vaultSigner": "ArxmmHEfiNun8sS6Z713WZwgmPKUFyDFmirRR9EdpMNA"
+		},
+		{
+			"name": "ATLAS",
+			"mint_address": "EtNUKRbTt572jkJSN8K7Tum48eXD17XF4oTS6Cne4jbi",
+			"market_address": "B79sUfMmhuQNfdg27FXqREuXmukbNhvUa4wmBYudrArF",
+			"price_oracle": "GMwyuarqEnNxBkCXH1fQGaghBEY5ucWzcruSSLToVjmS",
+			"product_oracle": "HtHU4rDTzAxHJvyvwtU9Mpyw9pMSMYJ1RvWySU1QomHP",
+			"pools": "2myEs8sw6Vy2emshqiidVJr8VtSvWRtd3fhx1YDBgsjS",
+			"openOrders": "2kJ4nYbAXJLjupcdg9ccBHDw9fyE6wJTSu5jC6mNnsuJ",
+			"requestQueue": "5n5esuBJ4y96XmxMmmcJR8pDT938rZC2tD9vn6BiyctL",
+			"eventQueue": "6zxWLpVYFHP8ppvrSu4ZrdSWtLWfPbtfRF8zbw6kR9Sm",
+			"bids": "ChSDLMCUt7R8fKMFCk2t1u4KR8FjtR3mFc7LTa5S8F3t",
+			"asks": "6Ru5RqJ7zL2Ahtbug4FPDR8GvY2Npzx8Azu2EpAazxqZ",
+			"tokenVault": "BGZppmGCy2V9n12PB7RLsuW3fEeCZxHP2pzHDSDXPNpE",
+			"quoteTokenVault": "BrgQbF5dX3XUG8b89D8YCHeN97HVbKazJPuQ6Wt1uGFB",
+			"vaultSigner": "DLyHXPwZjDQ8grXR5Zs1d84MsnAkAED7VQY3DVx4kU85"
+		}
+	],
+	"baskets": [
+		{
+			"name": "First tier coins",
+			"desc": "Basket for first tier coins",
+			"basket_address": "EYA2ZgfaqV75niM6yfuTqa1Q1VAhRkdHFCEkH4wGy4eX",
+			"basket_mint_address": "6fuVskj1B41SWDpYcDXtvrWKHaqB6vt4QwXhDk1ov5yu",
+			"basket_components": [
+				{
+					"name": "BTC",
+					"amount": 0.01
+				},
+				{
+					"name": "ETH",
+					"amount": 0.1
+				},
+				{
+					"name": "SOL",
+					"amount": 2
+				}
+			]
+		},
+		{
+			"name": "Solana coins",
+			"desc": "Basket for coins derived from solana",
+			"basket_address": "E5woAYNmiotSMT7zcJLrJPkXkfY7KYZdAwpSn67sTpZ7",
+			"basket_mint_address": "5c5YKNqdnc5zfGoyjgsH7z728g9vgoFAnLprbb5V3wmP",
+			"basket_components": [
+				{
+					"name": "SOL",
+					"amount": 2
+				},
+				{
+					"name": "SRM",
+					"amount": 100
+				},
+				{
+					"name": "MNGO",
+					"amount": 1000
+				}
+			]
+		},
+		{
+			"name": "Small coins",
+			"desc": "Basket for coins that have potential in future",
+			"basket_address": "7DjGNWUWpg2LU2irD8GNaJ8ZuC8dQHLvKJJf4k43snsj",
+			"basket_mint_address": "DeydBwieiZNghj4aQKLX9gzRaN4XLYaR98FR254Jr1oq",
+			"basket_components": [
+				{
+					"name": "GRAPH",
+					"amount": 10000
+				},
+				{
+					"name": "ATLAS",
+					"amount": 10000
+				}
+			]
+		}
+	]
+}

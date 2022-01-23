@@ -20,7 +20,7 @@ export interface PhantomProvider {
   listeners: (event: PhantomEvent) => (() => void)[];
 }
 
-function get_provider(): PhantomProvider | undefined {
+export function get_provider(): PhantomProvider | undefined {
     if ((window as any)?.solana?.isPhantom) {
         return (window as any).solana;
     }
