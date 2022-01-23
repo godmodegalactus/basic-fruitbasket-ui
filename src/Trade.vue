@@ -7,18 +7,18 @@
         <div class="mb-1">
           <div class="mb-1">
               <label for=""> Basket {{ basketList.basket_1?.name ?? '' }} </label>
-              address : {{ basketList.basket_1?.address ?? '' }}
-              components : {{basketList.basket_1?.components ?? ''}}
+              <div>address : {{ basketList.basket_1?.address ?? '' }}</div>
+              <div>components : {{basketList.basket_1?.components ?? ''}}</div>
           </div>
           <div class="mb-1">
             <label for=""> Basket {{ basketList.basket_2?.name ?? '' }} </label>
-              address : {{ basketList.basket_2?.address ?? '' }}
-              components : {{basketList.basket_2?.components ?? ''}}
+              <div>address : {{ basketList.basket_2?.address ?? '' }}</div>
+              <div>components : {{basketList.basket_2?.components ?? ''}}</div>
           </div>
           <div class="mb-1">
            <label for=""> Basket {{ basketList.basket_3?.name ?? '' }} </label>
-              address : {{ basketList.basket_3?.address ?? '' }}
-              components : {{basketList.basket_3?.components ?? ''}}
+              <div>address : {{ basketList.basket_3?.address ?? '' }}</div>
+              <div>components : {{basketList.basket_3?.components ?? ''}}</div>
           </div>
         </div>
       </div>
@@ -28,13 +28,13 @@
            <div>{{ formState.publicKey ?? '--' }}</div>
           <input class="cursor-pointer bg-btn normal-font-size" type="submit" value="Connect Phantom" @click="connectPh">
       </div>
-      <div class="mb-1">
+      <!--<div class="mb-1">
           <label for="">Fruitbasket program id</label>
           <input class="display-block" type="text" id="" v-model="formState.programId">
-      </div>
+      </div>-->
       <div class="mb-1">
           <label for="">Basket</label>
-          <input class="display-block" type="text" v-model="formState.basketKey">
+          <input class="display-block" type="text" v-model="formState.basketIndex">
       </div>
       <div class="mb-1">
           <label for="">Amount</label>
@@ -138,7 +138,7 @@ export default defineComponent({
     const formState = reactive({
       publicKey: "",
       programId: "",
-      basketKey: "",
+      basketIndex: "",
       amount: 0,
     })
 
@@ -174,7 +174,7 @@ export default defineComponent({
     const resetUI = () => {
       formState.publicKey = "";
       formState.programId = "";
-      formState.basketKey = "";
+      formState.basketIndex = "";
       formState.amount = 0;
     }
 

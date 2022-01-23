@@ -17,7 +17,7 @@ export const getBasketData = async( basketIndex : number ) => {
   const basket = data.baskets[basketIndex];
   let component_string = '';
   for (let i = 0; i < basket.basket_components.length; ++i) {
-    component_string = component_string + ' , Name : ' + basket.basket_components[i].name + " Amount : " + basket.basket_components[i].amount;
+    component_string = component_string + '{Token: ' + basket.basket_components[i].name + " Amount: " + basket.basket_components[i].amount + "}, ";
   }
   return {
       name : basket.name,
@@ -27,3 +27,14 @@ export const getBasketData = async( basketIndex : number ) => {
       components : component_string,
   };
 }
+
+export class UIContext {
+    public provider : anchor.Provider;
+    public owner : web3.Keypair;
+    constructor()
+    {
+        this.provider = anchor.Provider.local();
+        this.owner = web3.Keypair.generate();
+    }
+}
+
