@@ -6,19 +6,22 @@
         <input style="margin-right: 5px;" class="cursor-pointer bg-btn normal-font-size" type="submit" value="Load Baskets" @click="loadBaskets">
         <div class="mb-1">
           <div class="mb-1">
-              <label for=""> Basket {{ basketList.basket_1?.name ?? '' }} </label>
+              <label for=""> Basket 1 : {{ basketList.basket_1?.name ?? '' }} </label>
               <div>address : {{ basketList.basket_1?.address ?? '' }}</div>
               <div>components : {{basketList.basket_1?.components ?? ''}}</div>
+              <div>Price : {{basketList.basket_1?.price ?? ''}}</div>
           </div>
           <div class="mb-1">
-            <label for=""> Basket {{ basketList.basket_2?.name ?? '' }} </label>
+            <label for=""> Basket 2 : {{ basketList.basket_2?.name ?? '' }} </label>
               <div>address : {{ basketList.basket_2?.address ?? '' }}</div>
               <div>components : {{basketList.basket_2?.components ?? ''}}</div>
+              <div>Price : {{basketList.basket_2?.price ?? ''}}</div>
           </div>
           <div class="mb-1">
-           <label for=""> Basket {{ basketList.basket_3?.name ?? '' }} </label>
+           <label for=""> Basket 3 : {{ basketList.basket_3?.name ?? '' }} </label>
               <div>address : {{ basketList.basket_3?.address ?? '' }}</div>
               <div>components : {{basketList.basket_3?.components ?? ''}}</div>
+              <div>Price : {{basketList.basket_3?.price ?? ''}}</div>
           </div>
         </div>
       </div>
@@ -34,11 +37,15 @@
       </div>-->
       <div class="mb-1">
           <label for="">Basket</label>
-          <input class="display-block" type="text" v-model="formState.basketIndex">
+          <input class="display-block" type="text" v-model="formState.basketIndex"  v-on:keyup.enter="setBasket">
       </div>
       <div class="mb-1">
           <label for="">Amount</label>
           <input class="display-block" type="number" v-model="formState.amount">
+      </div>
+      <div class="mb-1">
+          <label for="">Max Price for Buy/Min Price for Sell</label>
+          <input class="display-block" type="number" v-model="formState.price_max_or_min">
       </div>
       <div class="mb-1">
           <input style="margin-right: 5px;" class="cursor-pointer bg-btn normal-font-size" type="submit" value="Buy Basket" @click="buyBasket">
@@ -50,7 +57,7 @@
     </div>
     <div>
       <div class="mb-1">
-        Basket:
+        Basket Key:
         <div>{{ basketState.basket_key ?? '--' }}</div>
       </div>
       <div class="mb-1">
@@ -71,7 +78,7 @@
       </div>
       <div class="mb-1">
         USDC Account:
-        <div>{{ userState.usdc_account ?? '--' }} USDC</div>
+        <div>{{ userState.usdc_account ?? '--' }}</div>
       </div>
       <div class="mb-1">
         USDC Balance:
@@ -94,7 +101,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import { connectPhantom } from "./util/phantom";
-import { getBasketData, updateTokenPool, UIContext } from "./util/fruitbasket";
+import { getBasketData, updateTokenPool, UIContext, getUserUsdcAccountAndAmount, getBasketDataForUser, buyBasketFb } from "./util/fruitbasket";
 
 interface BasketState {
   basket_key : null | string;
@@ -124,7 +131,8 @@ interface BasketData {
   desc : string,
   address : string,
   mint : string,
-  components : string
+  components : string,
+  price : number,
 }
 
 interface BasketList {
@@ -136,11 +144,13 @@ interface BasketList {
 export default defineComponent({
   setup() {
     const context = new UIContext();
+
     const formState = reactive({
       publicKey: "",
       programId: "",
-      basketIndex: "",
+      basketIndex: 0,
       amount: 0,
+      price_max_or_min: 0,
     })
 
     const basketState: BasketState = reactive({
@@ -175,33 +185,59 @@ export default defineComponent({
     const resetUI = () => {
       formState.publicKey = "";
       formState.programId = "";
-      formState.basketIndex = "";
+      formState.basketIndex = 0;
       formState.amount = 0;
     }
+
+    const loadUserData = async() => {
+      const dat = await  getUserUsdcAccountAndAmount(context, formState.publicKey);
+      userState.usdc_account = dat.key;
+      userState.usdc_balance = dat.balance.toNumber() / (10 ** 6);
+    };
 
     const connectPh = async () => {
       const publicKey = await connectPhantom();
       formState.publicKey = publicKey;
+      loadUserData();
     }
 
     const loadBasket = async(x : number) => {
       try{
-        return getBasketData(x);
+        return getBasketData(context, x);
       }
       catch(err) {
         return null;
       }
     }
 
+    const setBasket = async() => {
+      if (formState.basketIndex > 0 && formState.basketIndex < 4) {
+        const index = formState.basketIndex - 1;
+        const basket = await loadBasket(index);
+        if(basket)
+        {
+          basketState.basket_key = basket.address;
+          basketState.basket_components = basket.components;
+          basketState.basket_price = basket.price;
+          if(formState.publicKey != "")
+          {
+            const userData = await getBasketDataForUser(context, index , formState.publicKey);
+            basketState.basket_account = userData.key;
+            basketState.current_balance = userData.balance.toNumber() / (10 ** 6);
+          }
+        }
+      }
+    }
+
     const updatePools = async() => {
       const dat = await updateTokenPool(context);
-      poolState.btc_pool = (await dat.btc_pool).toNumber();
-      poolState.eth_pool = (await dat.eth_pool).toNumber();
-      poolState.sol_pool = (await dat.sol_pool).toNumber();
-      poolState.srm_pool = (await dat.srm_pool).toNumber();
-      poolState.mngo_pool = (await dat.mngo_pool).toNumber();
-      poolState.grp_pool = (await dat.grp_pool).toNumber();
-      poolState.atlas_pool = (await dat.atlas_pool).toNumber();
+      poolState.btc_pool = (await dat.btc_pool).toNumber() / (10 ** 6);
+      poolState.eth_pool = (await dat.eth_pool).toNumber() / (10 ** 6);
+      poolState.sol_pool = (await dat.sol_pool).toNumber() / (10 ** 6);
+      poolState.srm_pool = (await dat.srm_pool).toNumber() / (10 ** 6);
+      poolState.mngo_pool = (await dat.mngo_pool).toNumber() / (10 ** 6);
+      poolState.grp_pool = (await dat.grp_pool).toNumber() / (10 ** 6);
+      poolState.atlas_pool = (await dat.atlas_pool).toNumber() / (10 ** 6);
     }
 
     const loadBaskets = async() => {
@@ -211,11 +247,22 @@ export default defineComponent({
       await updatePools();
     }
 
+    const buyBasket = async() => {
+      if (formState.basketIndex > 0 && formState.basketIndex < 4) {
+        const index = formState.basketIndex - 1;
+        await buyBasketFb(context, index, formState.publicKey, formState.amount * (10 ** 6), formState.price_max_or_min * (10**6));
+        await loadUserData();
+        await updatePools();
+      }
+    }
+
     return {
       formState,
       resetUI,
       connectPh,
       loadBaskets,
+      setBasket,
+      buyBasket,
       basketState,
       basketList,
       poolState,

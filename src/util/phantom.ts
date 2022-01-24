@@ -28,16 +28,16 @@ export function get_provider(): PhantomProvider | undefined {
 }
 
 export const defaultProvider  = {
-    publicKey : new PublicKey(0),
-    isConnected : false,
-    autoApprove : false,
-    signTransaction : null, 
-    signAllTransactions : null,
-    connect : null,
-    disconnect : null, 
-    on: null,
-    request : null,
-    listeners: null,
+  publicKey : new PublicKey(0),
+  isConnected: false,
+  autoApprove: false,
+  signTransaction : async(transaction: Transaction) => { return transaction; },
+  signAllTransactions : async(transactions: Transaction[]) => { return transactions; },
+  connect : async() => {},
+  disconnect : async() => {},
+  on : (event: PhantomEvent, handler: (args: any) => void) =>{},
+  request : (method: PhantomRequestMethod, params: any) => {let x:any; return x;},
+  listeners : (event: PhantomEvent) => { return [() => {}] },
 }
 
 export const connectPhantom = async() => {
