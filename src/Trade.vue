@@ -94,7 +94,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import { connectPhantom } from "./util/phantom";
-import { getBasketData } from "./util/fruitbasket";
+import { getBasketData, updateTokenPool, UIContext } from "./util/fruitbasket";
 
 interface BasketState {
   basket_key : null | string;
@@ -135,6 +135,7 @@ interface BasketList {
 
 export default defineComponent({
   setup() {
+    const context = new UIContext();
     const formState = reactive({
       publicKey: "",
       programId: "",
@@ -192,10 +193,22 @@ export default defineComponent({
       }
     }
 
+    const updatePools = async() => {
+      const dat = await updateTokenPool(context);
+      poolState.btc_pool = (await dat.btc_pool).toNumber();
+      poolState.eth_pool = (await dat.eth_pool).toNumber();
+      poolState.sol_pool = (await dat.sol_pool).toNumber();
+      poolState.srm_pool = (await dat.srm_pool).toNumber();
+      poolState.mngo_pool = (await dat.mngo_pool).toNumber();
+      poolState.grp_pool = (await dat.grp_pool).toNumber();
+      poolState.atlas_pool = (await dat.atlas_pool).toNumber();
+    }
+
     const loadBaskets = async() => {
       basketList.basket_1 = await loadBasket(0);
       basketList.basket_2 = await loadBasket(1);
       basketList.basket_3 = await loadBasket(2);
+      await updatePools();
     }
 
     return {

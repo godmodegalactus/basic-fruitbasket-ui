@@ -8,7 +8,7 @@ type PhantomRequestMethod =
   | 'signAllTransactions';
 
 export interface PhantomProvider {
-  publicKey?: PublicKey;
+  publicKey: PublicKey;
   isConnected?: boolean;
   autoApprove?: boolean;
   signTransaction: (transaction: Transaction) => Promise<Transaction>;
