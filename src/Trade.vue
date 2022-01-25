@@ -52,7 +52,7 @@
           <input style="margin-right: 5px;" class="cursor-pointer bg-btn normal-font-size" type="submit" value="Sell Basket" @click="sellBasket">
       </div>
       <div class= "mb-1">
-          <input style="margin-right: 5px;" class="cursor-pointer bg-btn normal-font-size" type="submit" value="Reset UI" @click="resetUI">
+          <input style="margin-right: 5px;" class="cursor-pointer bg-btn normal-font-size" type="submit" value="Refresh UI" @click="resetUI">
       </div>
     </div>
     <div>
@@ -105,7 +105,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import { connectPhantom } from "./util/phantom";
-import { getBasketData, updateTokenPool, UIContext, getUserUsdcAccountAndAmount, getBasketDataForUser, buyBasketFb } from "./util/fruitbasket";
+import { getBasketData, updateTokenPool, UIContext, getUserUsdcAccountAndAmount, getBasketDataForUser, buyBasketFb, sellBasketFb } from "./util/fruitbasket";
 
 interface BasketState {
   basket_key : null | string;
@@ -187,11 +187,10 @@ export default defineComponent({
       usdc_balance : null,
     })
 
-    const resetUI = () => {
-      formState.publicKey = "";
-      formState.programId = "";
-      formState.basketIndex = 0;
-      formState.amount = 0;
+    const resetUI = async() => {
+      await updatePools();
+      await loadUserData();
+      await setBasket();
     }
 
     const loadUserData = async() => {
@@ -257,6 +256,17 @@ export default defineComponent({
         const index = formState.basketIndex - 1;
         await buyBasketFb(context, index, formState.publicKey, formState.amount * (10 ** 6), formState.price_max_or_min * (10**6), formState.transaction_id);
         await loadUserData();
+        await setBasket();
+        await updatePools();
+      }
+    }
+
+    const sellBasket = async() => {
+      if (formState.basketIndex > 0 && formState.basketIndex < 4) {
+        const index = formState.basketIndex - 1;
+        await sellBasketFb(context, index, formState.publicKey, formState.amount * (10 ** 6), formState.price_max_or_min * (10**6), formState.transaction_id);
+        await setBasket();
+        await loadUserData();
         await updatePools();
       }
     }
@@ -268,6 +278,7 @@ export default defineComponent({
       loadBaskets,
       setBasket,
       buyBasket,
+      sellBasket,
       basketState,
       basketList,
       poolState,
