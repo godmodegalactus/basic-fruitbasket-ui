@@ -1,5 +1,5 @@
 import { AccountLayout, Token, TOKEN_PROGRAM_ID } from "@solana/spl-token";
-import { Account, Connection, PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY, Transaction, TransactionInstruction } from "@solana/web3.js";
+import { Account, Connection, Keypair, PublicKey, SystemProgram, SYSVAR_RENT_PUBKEY, Transaction, TransactionInstruction } from "@solana/web3.js";
 import * as anchor from "@project-serum/anchor";
 import { AccountClient, Program, web3 } from "@project-serum/anchor";
 import { Fruitbasket } from "./types/fruitbasket";
@@ -137,7 +137,7 @@ const ContextSide = {
     sell :{}
   }
 };
-const tradeBasket = async(ctx: UIContext, basketIndex: number, user : String, amount : number, price_min_or_max: number, is_buy_side: Boolean) => {
+const tradeBasket = async(ctx: UIContext, basketIndex: number, user : String, amount : number, price_min_or_max: number, transaction_id: number, is_buy_side: Boolean) => {
   const program = await ctx.getProgram();
   if(!program)
   {
@@ -159,12 +159,12 @@ const tradeBasket = async(ctx: UIContext, basketIndex: number, user : String, am
     [
       Buffer.from("fruitbasket_context"),
       userKey.toBuffer(),
-      Buffer.from([3]),
+      Buffer.from([transaction_id]),
     ],
     new PublicKey(fruit_basket_program_id)
   );
   let tx1 = await program.transaction.initTradeContext(
-    3,
+    transaction_id,
     trade_context_bump,
     is_buy_side ? buy_side : sell_side,
     new anchor.BN(amount), // buy 1 basket
@@ -194,11 +194,15 @@ const tradeBasket = async(ctx: UIContext, basketIndex: number, user : String, am
       var test = signedTransaction.serialize();
       await ctx.provider.connection.sendRawTransaction(test);
     }
-    let ttx = new Transaction();
+    const owner = Keypair.generate();
+    await ctx.provider.connection.confirmTransaction(
+      await ctx.provider.connection.requestAirdrop(owner.publicKey, 100000000000),
+      "confirmed"
+    );
     // process all the transactionswa
     basket.tokens.forEach( async(x) => {
       const token = data.tokens[x];
-      ttx.add( program.transaction.processTokenForContext(
+      const ttx = program.transaction.processTokenForContext(
         {
           accounts : {
             fruitbasketGroup : new PublicKey(data.group),
@@ -222,18 +226,24 @@ const tradeBasket = async(ctx: UIContext, basketIndex: number, user : String, am
             dexProgram : new PublicKey(dex_id),
             tokenProgram : TOKEN_PROGRAM_ID,
             rent : web3.SYSVAR_RENT_PUBKEY,
-          }
+          },
+          signers : [owner],
         }
-      ));
+      );
+
+      {
+        ttx.feePayer = await owner.publicKey;
+        let blockhashObj = await ctx.provider.connection.getRecentBlockhash();
+        ttx.recentBlockhash = await blockhashObj.blockhash;
+
+        const signature = await web3.sendAndConfirmTransaction(
+          connection,
+          ttx,
+          [owner],
+          { commitment: 'confirmed' },);
+      }
     });
-    {
-      ttx.feePayer = await ctx.provider.wallet.publicKey;
-      let blockhashObj = await ctx.provider.connection.getRecentBlockhash();
-      ttx.recentBlockhash = await blockhashObj.blockhash;
-      const signedTransaction = await ctx.provider.wallet.signTransaction(ttx);
-      var test = signedTransaction.serialize();
-      await ctx.provider.connection.sendRawTransaction(test);
-    }
+    
     const ftx = program.transaction.finalizeContext(
       {
         accounts : {
@@ -249,19 +259,22 @@ const tradeBasket = async(ctx: UIContext, basketIndex: number, user : String, am
           user : userKey,
           tokenProgram : TOKEN_PROGRAM_ID,
           systemProgram : web3.SystemProgram.programId,
-        }
+        },
+          signers : [owner],
       }
     );
 
     ftx.feePayer = await ctx.provider.wallet.publicKey;
     let blockhashObj = await ctx.provider.connection.getRecentBlockhash();
     ftx.recentBlockhash = await blockhashObj.blockhash;
-    const signedTransaction = await ctx.provider.wallet.signTransaction(ftx);
-    var test = signedTransaction.serialize();
-    await ctx.provider.connection.sendRawTransaction(test);
+    const signature = await web3.sendAndConfirmTransaction(
+      connection,
+      ftx,
+      [owner],
+      { commitment: 'confirmed' },);
     
 }
 
-export const buyBasketFb = async(ctx: UIContext, basketIndex : number, user: String, amount: number, price_min_or_max: number) => {
-  tradeBasket(ctx, basketIndex, user, amount, price_min_or_max, true);
+export const buyBasketFb = async(ctx: UIContext, basketIndex : number, user: String, amount: number, price_min_or_max: number, transaction_id: number) => {
+  tradeBasket(ctx, basketIndex, user, amount, price_min_or_max, transaction_id, true);
 }

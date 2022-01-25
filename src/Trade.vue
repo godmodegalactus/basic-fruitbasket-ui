@@ -95,6 +95,10 @@
         <div>ATLAS : {{ poolState.atlas_pool ?? '--' }} ATLAS</div>
       </div>
     </div>
+    <div class="mb-1">
+          <label for="">Transaction Id</label>
+          <input class="display-block" type="number" v-model="formState.transaction_id">
+    </div>
   </div>
 </template>
 
@@ -151,6 +155,7 @@ export default defineComponent({
       basketIndex: 0,
       amount: 0,
       price_max_or_min: 0,
+      transaction_id: 0,
     })
 
     const basketState: BasketState = reactive({
@@ -250,7 +255,7 @@ export default defineComponent({
     const buyBasket = async() => {
       if (formState.basketIndex > 0 && formState.basketIndex < 4) {
         const index = formState.basketIndex - 1;
-        await buyBasketFb(context, index, formState.publicKey, formState.amount * (10 ** 6), formState.price_max_or_min * (10**6));
+        await buyBasketFb(context, index, formState.publicKey, formState.amount * (10 ** 6), formState.price_max_or_min * (10**6), formState.transaction_id);
         await loadUserData();
         await updatePools();
       }
